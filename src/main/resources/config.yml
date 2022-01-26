@@ -1,0 +1,7 @@
+connection:
+  type: "sqlite"
+  credential:
+    host: "localhost"
+    db: "minecraft"
+    user: "root"
+    password: ""

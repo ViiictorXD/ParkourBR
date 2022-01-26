@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
+}
+
+group 'com.github.viiictorxd'
+version '1.0.0-SNAPSHOT'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+
+    maven { url = 'https://maven.elmakers.com/repository/' }
+    maven { url = 'https://jitpack.io' }
+}
+
+dependencies {
+    compileOnly 'org.spigotmc:spigot:1.8.8-R0.1-SNAPSHOT'
+
+
+    implementation(
+            'com.github.DevNatan:inventory-framework:2.3.1',
+            
+            'com.github.SaiintBrisson.command-framework:bukkit:1.2.0',
+            'com.github.SaiintBrisson.command-framework:shared:1.2.0'
+    )
+    compileOnly 'org.jetbrains:annotations:22.0.0'
+
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding("UTF-8")
+}
+
+allprojects {
+    libsDirName = 'C:/Users/Vitera/Documents/MEGAsync/Minecraft Stuff/Test Server/plugins'
+}

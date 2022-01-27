@@ -13,9 +13,11 @@ import com.rukko.parkour.loadable.impl.ParkourLoadable;
 import com.rukko.parkour.manager.*;
 import com.rukko.parkour.model.Board;
 import com.rukko.parkour.model.arena.Arena;
+import com.rukko.parkour.model.user.Content;
 import com.rukko.parkour.model.user.User;
 import com.rukko.parkour.repository.user.MatchRepository;
 import com.rukko.parkour.repository.user.MatchRepositoryImpl;
+import com.rukko.parkour.serialization.Serializations;
 import com.rukko.parkour.view.MatchView;
 import com.rukko.parkour.view.RankingView;
 import lombok.Getter;
@@ -27,6 +29,7 @@ import me.saiintbrisson.minecraft.command.message.MessageType;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -93,6 +96,21 @@ public class ParkourPlugin extends JavaPlugin {
     public void onDisable() {
         if (connectionFactory != null && connectionFactory.hasConnection())
             connectionFactory.disconnect();
+
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            final Arena arena = arenaManagement.match(player.getUniqueId());
+
+            if (arena == null)
+                continue;
+
+            final User user = userManagement.match(player.getUniqueId());
+
+            final Content content = user.getContent();
+            final PlayerInventory inventory = player.getInventory();
+
+            inventory.setContents(Serializations.ITEM_STACK_VET_SERIALIZATION.deserialize(content.getInventoryContent()));
+            inventory.setArmorContents(Serializations.ITEM_STACK_VET_SERIALIZATION.deserialize(content.getArmorContent()));
+        }
     }
 
     private void registerViews() {

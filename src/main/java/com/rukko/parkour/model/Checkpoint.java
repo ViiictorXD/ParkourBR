@@ -5,9 +5,12 @@ import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Location;
 
-/**
- * @author ViiictorXD
- */
+ /**
+  * This file is part of a ViiictorXD project
+  *
+  * Copyright (c) ViiictorXD
+  * https://github.com/viiictorxd
+  **/
 
 @Getter
 @AllArgsConstructor

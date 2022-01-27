@@ -1,8 +1,11 @@
 package com.rukko.parkour.repository.user;
 
-/**
- * @author ViiictorXD
- */
+ /**
+  * This file is part of a ViiictorXD project
+  *
+  * Copyright (c) ViiictorXD
+  * https://github.com/viiictorxd
+  **/
 public interface MatchConstants {
 
     String MATCH = "SELECT * FROM parkour_matches WHERE uniqueId = ?";

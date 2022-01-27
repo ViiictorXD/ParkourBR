@@ -4,9 +4,12 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.ChatColor;
 
-/**
- * @author ViiictorXD
- */
+ /**
+  * This file is part of a ViiictorXD project
+  *
+  * Copyright (c) ViiictorXD
+  * https://github.com/viiictorxd
+  **/
 
 @Getter
 @RequiredArgsConstructor

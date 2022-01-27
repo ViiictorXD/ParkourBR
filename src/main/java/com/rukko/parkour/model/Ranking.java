@@ -4,9 +4,12 @@ import com.rukko.parkour.model.user.match.MatchResult;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-/**
- * @author ViiictorXD
- */
+ /**
+  * This file is part of a ViiictorXD project
+  *
+  * Copyright (c) ViiictorXD
+  * https://github.com/viiictorxd
+  **/
 
 @Getter
 @AllArgsConstructor

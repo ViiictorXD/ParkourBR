@@ -9,9 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author ViiictorXD
- */
+ /**
+  * This file is part of a ViiictorXD project
+  *
+  * Copyright (c) ViiictorXD
+  * https://github.com/viiictorxd
+  **/
 
 @Getter
 @Setter

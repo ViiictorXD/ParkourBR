@@ -1,0 +1,55 @@
+messages:
+  none: "None"
+  item:
+    match-empty-name: "&cEmpty"
+    match-empty-lore: "&cYou haven't entered any arena yet."
+    match-name: "&a{match_id}"
+    match-lore:
+      - "&7Parkour Name: &f{match_parkour_name}"
+      - "&7Result: {match_result}"
+      - ""
+      - "&7Elapse Time: &f{match_time}"
+      - "&7Date: &f{match_date}"
+    ranking-empty-name: "&cEmpty"
+    ranking-empty-lore: "&cThere is no one in the rankings yet."
+    ranking-name: "&a{ranking_position}° {ranking_player_name}"
+    ranking-lore:
+      - "&7Arena Name: &f{ranking_arena_name}"
+      - "&7Result: {ranking_arena_result}"
+      - ""
+      - "&7Elapse Time: &f{ranking_arena_elapse_time}"
+      - "&7Date: &f{ranking_arena_date}"
+  parkour:
+    not-in: "&cYou are not in an parkour arena."
+    not-available: "&cThat arena parkour isn't available to use."
+    already-playing: "&cYou are already in an arena. To exit, use: '/parkour exit'."
+    leave-success: "cYou left the parkour arena."
+    start-info: "&cUse '/parkour start <name>' to start a parkour arena."
+    start-success: "&aYou entered the parkour arena!"
+    info: |
+      &a/parkour start <arena name> §7- Start parkour.
+      &a/parkour leave §7- Leave of parkour.
+      &a/parkour matches §7- Your matches.
+      &a/parkour ranking §7- Parkour end time ranking.
+  arena:
+    not-exists: "&cA parkour arena with that name doesn't exists."
+    already-exists: "&cA parkour arena with that name already exists."
+    valid-index: "&cInsert a valid index."
+    checkpoint-not-exists: "&cA checkpoint with that index doesn't exists."
+    location-not-exists: "&cA location with that name doesn't exists. Available: entry, exit and end."
+    add-info: "&cUse '/arena add <name> <index>' to add a parkour arena checkpoint."
+    add-success: "&aArena {0} updated."
+    create-info: "&cUse '/arena create <name>' to create a parkour arena."
+    create-success: "&aArena {0} created."
+    delete-info: "&cUse '/arena delete <name>' to delete a parkour arena."
+    delete-success: "&aArena {0} deleted."
+    remove-info: "&cUse '/arena remove <name> <index>' to remove a parkour arena checkpoint."
+    remove-success: "&aArena {0} updated."
+    set-info: "&cUse '/arena set <name> <location name>' to set parkour arena locations."
+    set-success: "&aArena {0} updated."
+    info: |
+      &a/arena create <name> §7- Create a parkour arena.
+      &a/arena delete <name> §7- Delete a parkour arena.
+      &a/arena set <name> <entry, exit, end> §7- Set parkour locations.
+      &a/arena add <name> <index> §7- Add a parkour checkpoint.
+      &a/arena remove <name> <index> §7- Remove a parkour checkpoint.

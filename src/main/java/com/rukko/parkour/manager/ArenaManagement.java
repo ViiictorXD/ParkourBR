@@ -1,7 +1,7 @@
 package com.rukko.parkour.manager;
 
-import com.rukko.parkour.event.arena.ArenaEndEvent;
-import com.rukko.parkour.event.arena.ArenaStartEvent;
+import com.rukko.parkour.bukkit.event.arena.ArenaEndEvent;
+import com.rukko.parkour.bukkit.event.arena.ArenaStartEvent;
 import com.rukko.parkour.model.arena.Arena;
 import lombok.Getter;
 
@@ -9,9 +9,12 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-/**
- * @author ViiictorXD
- */
+ /**
+  * This file is part of a ViiictorXD project
+  *
+  * Copyright (c) ViiictorXD
+  * https://github.com/viiictorxd
+  **/
 
 @Getter
 public class ArenaManagement {

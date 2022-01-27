@@ -6,9 +6,12 @@ import lombok.Getter;
 import java.time.Instant;
 import java.util.UUID;
 
-/**
- * @author ViiictorXD
- */
+ /**
+  * This file is part of a ViiictorXD project
+  *
+  * Copyright (c) ViiictorXD
+  * https://github.com/viiictorxd
+  **/
 
 @Getter
 @AllArgsConstructor

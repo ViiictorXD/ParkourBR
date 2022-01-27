@@ -1,15 +1,15 @@
 package com.rukko.parkour;
 
-import com.rukko.parkour.board.FastBoard;
-import com.rukko.parkour.builder.ItemBuilder;
-import com.rukko.parkour.command.arena.*;
-import com.rukko.parkour.command.parkour.*;
-import com.rukko.parkour.connection.ConnectionFactory;
-import com.rukko.parkour.connection.sql.SqliteConnectionFactory;
-import com.rukko.parkour.listener.BaseListener;
-import com.rukko.parkour.listener.ConnectionListener;
-import com.rukko.parkour.listener.PlayerListener;
-import com.rukko.parkour.loadable.impl.ParkourLoadable;
+import com.rukko.parkour.backend.board.FastBoard;
+import com.rukko.parkour.backend.builder.ItemBuilder;
+import com.rukko.parkour.bukkit.command.arena.*;
+import com.rukko.parkour.bukkit.command.parkour.*;
+import com.rukko.parkour.backend.connection.ConnectionFactory;
+import com.rukko.parkour.backend.connection.sql.SqliteConnectionFactory;
+import com.rukko.parkour.bukkit.listener.BaseListener;
+import com.rukko.parkour.bukkit.listener.ConnectionListener;
+import com.rukko.parkour.bukkit.listener.PlayerListener;
+import com.rukko.parkour.backend.loadable.impl.ParkourLoadable;
 import com.rukko.parkour.manager.*;
 import com.rukko.parkour.model.Board;
 import com.rukko.parkour.model.arena.Arena;
@@ -17,9 +17,11 @@ import com.rukko.parkour.model.user.Content;
 import com.rukko.parkour.model.user.User;
 import com.rukko.parkour.repository.user.MatchRepository;
 import com.rukko.parkour.repository.user.MatchRepositoryImpl;
-import com.rukko.parkour.serialization.Serializations;
-import com.rukko.parkour.view.MatchView;
-import com.rukko.parkour.view.RankingView;
+import com.rukko.parkour.backend.serialization.Serializations;
+import com.rukko.parkour.bukkit.view.MatchView;
+import com.rukko.parkour.bukkit.view.RankingView;
+import com.rukko.parkour.settings.Messages;
+import com.rukko.parkour.settings.Settings;
 import lombok.Getter;
 import me.saiintbrisson.bukkit.command.BukkitFrame;
 import me.saiintbrisson.minecraft.ViewFrame;
@@ -27,14 +29,23 @@ import me.saiintbrisson.minecraft.ViewItem;
 import me.saiintbrisson.minecraft.command.message.MessageHolder;
 import me.saiintbrisson.minecraft.command.message.MessageType;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
+import java.util.List;
+
 /**
- * @author ViiictorXD
- */
+  * This file is part of a ViiictorXD project
+  *
+  * Copyright (c) ViiictorXD
+  * https://github.com/viiictorxd
+  **/
 
 @Getter
 public class ParkourPlugin extends JavaPlugin {
@@ -48,7 +59,6 @@ public class ParkourPlugin extends JavaPlugin {
     private ReplaceManagement replaceManagement;
     private ArenaManagement arenaManagement;
 
-    private ParkourBoard parkourBoard;
     private ParkourLoadable parkourLoadable;
 
     private MatchRepository matchRepository;
@@ -59,6 +69,7 @@ public class ParkourPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         saveDefaultConfig();
+        saveDefaultEnums();
 
         connectionFactory = new SqliteConnectionFactory(getDataFolder(), "parkour_database");
         connectionFactory.connect();
@@ -72,16 +83,11 @@ public class ParkourPlugin extends JavaPlugin {
 
         replaceManagement.registerDefaults();
 
-        parkourBoard = new ParkourBoard();
         parkourLoadable = new ParkourLoadable(this);
-
         matchRepository = new MatchRepositoryImpl(connectionFactory);
 
-        parkourBoard.load();
         parkourLoadable.load();
-
         matchRepository.createNonExistentTable();
-
         rankingManagement.setRankings(matchRepository.getRanking());
 
         Bukkit.getScheduler().runTaskTimerAsynchronously(this, new ParkourArenaTask(this), 20L, 20L);
@@ -110,6 +116,35 @@ public class ParkourPlugin extends JavaPlugin {
 
             inventory.setContents(Serializations.ITEM_STACK_VET_SERIALIZATION.deserialize(content.getInventoryContent()));
             inventory.setArmorContents(Serializations.ITEM_STACK_VET_SERIALIZATION.deserialize(content.getArmorContent()));
+        }
+    }
+
+    private void saveDefaultEnums() {
+        for (Settings setting : Settings.values()) {
+            final Object pattern = getConfig().get(setting.getPath());
+
+            if (pattern instanceof String) {
+                Settings.constructor(setting, ChatColor.translateAlternateColorCodes('&', (String) pattern));
+            }
+
+            if (pattern instanceof List) {
+                final List<String> list = (List<String>) pattern;
+                list.replaceAll(operator -> ChatColor.translateAlternateColorCodes('&', operator));
+
+                Settings.constructor(setting, list);
+            }
+        }
+
+        final String local = "lang" + File.separator + Settings.DEFAULT_LANG.asString() + ".yml";
+
+        final File file = new File(getDataFolder(), local);
+        final FileConfiguration configuration = YamlConfiguration.loadConfiguration(file);
+
+        if (!file.exists())
+            saveResource(local, false);
+
+        for (Messages message : Messages.values()) {
+            Messages.constructor(message, configuration.get(message.getPath(), "Miss: " + message.getPath()));
         }
     }
 
@@ -151,7 +186,7 @@ public class ParkourPlugin extends JavaPlugin {
     }
 
     private void registerListeners() {
-        Bukkit.getPluginManager().registerEvents(new BaseListener(userManagement, matchRepository, boardManagement, parkourBoard), this);
+        Bukkit.getPluginManager().registerEvents(new BaseListener(userManagement, matchRepository, boardManagement), this);
         Bukkit.getPluginManager().registerEvents(new ConnectionListener(this), this);
         Bukkit.getPluginManager().registerEvents(new PlayerListener(arenaManagement), this);
     }
@@ -159,7 +194,7 @@ public class ParkourPlugin extends JavaPlugin {
     public void constructor(Player player) {
         if (!boardManagement.exists(player)) {
             final FastBoard board = new FastBoard(player);
-            board.updateTitle(parkourBoard.getTitle());
+            board.updateTitle(Settings.SCOREBOARD_TITLE.asString());
 
             boardManagement.constructor(new Board(player, board));
         }

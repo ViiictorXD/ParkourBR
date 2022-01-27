@@ -1,7 +1,48 @@
+# General settings
+settings:
+  # Default messages language identification
+  default-lang: "en"
+  # Inventories configuration
+  inventories:
+    matches-title: ">Matches"
+    ranking-title: ">Ranking"
+
+# Database configuration
 connection:
+  # SQL database type (available: sqlite or mysql)
+  # sqlite is a local sql database and don't need credential
   type: "sqlite"
+  # If connection type is mysql, fill credential
   credential:
     host: "localhost"
     db: "minecraft"
     user: "root"
     password: ""
+
+# Scoreboard title & lines configuration
+scoreboard:
+  title: "&6&lPARKOUR"
+  casual:
+    enabled: true
+    lines:
+      - ""
+      - " &aBest Attempt: &f{attempt_pattern}"
+      - ""
+      - " &aLeaderboard:"
+      - "  §2#1 {ranking_name_1}: §f{ranking_elapsed_1}"
+      - "  §2#2 {ranking_name_2}: §f{ranking_elapsed_2}"
+      - "  §2#3 {ranking_name_3}: §f{ranking_elapsed_3}"
+      - "  §2#4 {ranking_name_4}: §f{ranking_elapsed_4}"
+      - "  §2#5 {ranking_name_5}: §f{ranking_elapsed_5}"
+      - ""
+      - "&2yourwebsite.here"
+  parkour:
+    enabled: true
+    lines:
+      - ""
+      - " §aCheckpoint:"
+      - "   §f{checkpoint_pattern}"
+      - " §aElapsed time: "
+      - "   §f{elapsed_pattern}"
+      - ""
+      - "&2yourwebsite.here"

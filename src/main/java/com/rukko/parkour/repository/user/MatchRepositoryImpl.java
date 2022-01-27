@@ -1,7 +1,7 @@
 package com.rukko.parkour.repository.user;
 
-import com.rukko.parkour.adapter.rs.RSMatchAdapter;
-import com.rukko.parkour.connection.ConnectionFactory;
+import com.rukko.parkour.backend.adapter.rs.RSMatchAdapter;
+import com.rukko.parkour.backend.connection.ConnectionFactory;
 import com.rukko.parkour.model.Ranking;
 import com.rukko.parkour.model.user.match.Match;
 import com.rukko.parkour.model.user.match.MatchResult;
@@ -12,9 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * @author ViiictorXD
- */
+ /**
+  * This file is part of a ViiictorXD project
+  *
+  * Copyright (c) ViiictorXD
+  * https://github.com/viiictorxd
+  **/
 
 @RequiredArgsConstructor
 public class MatchRepositoryImpl implements MatchRepository {

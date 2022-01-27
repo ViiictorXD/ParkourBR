@@ -6,9 +6,12 @@ import lombok.Getter;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * @author ViiictorXD
- */
+ /**
+  * This file is part of a ViiictorXD project
+  *
+  * Copyright (c) ViiictorXD
+  * https://github.com/viiictorxd
+  **/
 
 @Getter
 public class ParkourManagement {

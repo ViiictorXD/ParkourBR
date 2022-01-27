@@ -1,7 +1,6 @@
 package com.rukko.parkour.model.arena;
 
-import com.rukko.parkour.board.FastBoard;
-import com.rukko.parkour.format.FormatTime;
+import com.rukko.parkour.backend.board.FastBoard;
 import com.rukko.parkour.model.Checkpoint;
 import com.rukko.parkour.model.Parkour;
 import com.rukko.parkour.model.user.match.MatchResult;
@@ -9,13 +8,14 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-import java.time.Instant;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
-/**
- * @author ViiictorXD
- */
+ /**
+  * This file is part of a ViiictorXD project
+  *
+  * Copyright (c) ViiictorXD
+  * https://github.com/viiictorxd
+  **/
 @Getter
 @Setter
 @RequiredArgsConstructor

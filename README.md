@@ -11,6 +11,10 @@ A Parkour system based on Hypixel, with ranking and match records.
 * Java 8+
 * [Spigot 1.8.8](https://cdn.getbukkit.org/spigot/spigot-1.8.8-R0.1-SNAPSHOT-latest.jar)
 
+### Images
+![alt text](https://i.imgur.com/UO1yghp.png)
+![alt text](https://i.imgur.com/kMbNIRi.png)
+
 ### Commands
 <table>
  <tr>

@@ -22,18 +22,13 @@
       <option name="url" value="file:/$MAVEN_REPOSITORY$/" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="elmakers-repo" />
-      <option name="name" value="elmakers-repo" />
+      <option name="id" value="maven" />
+      <option name="name" value="maven" />
       <option name="url" value="https://maven.elmakers.com/repository/" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="maven" />
-      <option name="name" value="maven" />
-      <option name="url" value="https://hub.spigotmc.org/nexus/content/repositories/snapshots/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven" />
-      <option name="name" value="maven" />
+      <option name="id" value="maven2" />
+      <option name="name" value="maven2" />
       <option name="url" value="https://jitpack.io" />
     </remote-repository>
   </component>
